@@ -25,10 +25,10 @@ public class Obj3D {
 
     private String dirPath;
 
-    public void bindTexture(String texFilename){
-        ResourceLocation textureResource = new ResourceLocation("eln", "model/" + dirPath + "/" + texFilename);
-        UtilsClient.bindTexture(textureResource);
-    }
+	public void bindTexture(String texFilename){
+		ResourceLocation textureResource = new ResourceLocation("eln", "model/" + dirPath + "/" + texFilename);
+		UtilsClient.bindTexture(textureResource);
+	}
 
     public static class FaceGroup {
         String mtlName = null;

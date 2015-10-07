@@ -13,9 +13,11 @@ buildscript {
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
         classpath 'de.undercouch:gradle-download-task:1.2'
+        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:0.14.449'
     }
 }
 
+apply plugin: 'kotlin'
 apply plugin: 'forge'
 apply plugin: 'de.undercouch.download'
 apply plugin: 'java'
@@ -30,6 +32,9 @@ version = VERSION
 sourceSets {
     main {
         java {
+            srcDirs = ['src/main/java']
+        }
+        kotlin {
             srcDirs = ['src/main/java']
         }
         resources {
@@ -48,14 +53,19 @@ minecraft {
 }
 
 
-
 configurations {
     external
     compile.extendsFrom external
 }
 
+repositories {
+    mavenCentral()
+}
+
 dependencies {
     external files("libs/commons-math3-3.3.jar", "libs/modbus4J.jar", "libs/seroUtils.jar")
+    external 'org.jetbrains.kotlin:kotlin-runtime:0.14.449'
+    external 'org.jetbrains.kotlin:kotlin-stdlib:0.14.449'
 }
 
 jar {

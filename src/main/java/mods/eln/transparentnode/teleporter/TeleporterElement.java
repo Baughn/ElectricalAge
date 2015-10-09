@@ -43,7 +43,7 @@ public class TeleporterElement extends TransparentNodeElement implements ITelepo
 
 	public TeleporterElement(TransparentNode transparentNode,
 			TransparentNodeDescriptor descriptor) {
-		super(transparentNode, descriptor);
+		super(transparentNode, descriptor, TransparentNodeElement.EntityMetaTag.Basic);
 		this.descriptor = (TeleporterDescriptor) descriptor;
 		publisher = new NodePeriodicPublishProcess(node, 2, 1);
 		powerLoad.isPrivateSubSystem();

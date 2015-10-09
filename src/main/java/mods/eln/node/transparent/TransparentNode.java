@@ -200,7 +200,7 @@ public class TransparentNode extends Node {
 
 	@Override
 	public int getBlockMetadata() {
-		return (((int) (element.getLightOpacity() * 3)) & 3)/* + element.tileEntityMetaTag() */;
+		return element.tileEntityMetaTag.meta;
 	}
 
 	@Override

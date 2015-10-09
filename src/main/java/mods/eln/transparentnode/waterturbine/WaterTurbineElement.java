@@ -34,7 +34,7 @@ public class WaterTurbineElement extends TransparentNodeElement{
 	
 	public WaterTurbineElement(TransparentNode transparentNode,
 			TransparentNodeDescriptor descriptor) {
-		super(transparentNode, descriptor);
+		super(transparentNode, descriptor, TransparentNodeElement.EntityMetaTag.Basic);
 		
 
 		

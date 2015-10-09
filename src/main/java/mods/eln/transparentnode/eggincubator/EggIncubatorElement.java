@@ -40,7 +40,7 @@ public class EggIncubatorElement extends TransparentNodeElement {
     double lastVoltagePublish;
 
     public EggIncubatorElement(TransparentNode transparentNode, TransparentNodeDescriptor descriptor) {
-		super(transparentNode,descriptor);
+		super(transparentNode,descriptor, TransparentNodeElement.EntityMetaTag.Basic);
 	   	electricalLoadList.add(powerLoad);
 	   	electricalComponentList.add(powerResistor);
 	   	slowProcessList.add(slowProcess);

@@ -29,7 +29,7 @@ public class FuelGeneratorElement extends TransparentNodeElement {
 
     public FuelGeneratorElement(TransparentNode transparentNode,
                                 TransparentNodeDescriptor descriptor) {
-        super(transparentNode, descriptor);
+        super(transparentNode, descriptor, TransparentNodeElement.EntityMetaTag.Basic);
         this.descriptor = (FuelGeneratorDescriptor) descriptor;
 
         electricalLoadList.add(positiveLoad);

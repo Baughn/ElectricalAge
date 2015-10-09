@@ -63,7 +63,7 @@ public class BatteryElement extends TransparentNodeElement {
     double fromItemStack_life;
     
 	public BatteryElement(TransparentNode transparentNode, TransparentNodeDescriptor descriptor) {
-		super(transparentNode, descriptor);
+		super(transparentNode, descriptor, TransparentNodeElement.EntityMetaTag.Basic);
 		this.descriptor = (BatteryDescriptor) descriptor;
 		
 	   	electricalLoadList.add(cutLoad);

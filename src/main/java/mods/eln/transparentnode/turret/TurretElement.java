@@ -17,7 +17,6 @@ import mods.eln.sim.ElectricalLoad;
 import mods.eln.sim.ThermalLoad;
 import mods.eln.sim.nbt.NbtElectricalLoad;
 import mods.eln.sim.nbt.NbtResistor;
-import mods.eln.sound.SoundCommand;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
@@ -42,7 +41,7 @@ public class TurretElement extends TransparentNodeElement {
     final TransparentNodeElementInventory inventory = new TransparentNodeElementInventory(1, 64, this);
 
 	public TurretElement(TransparentNode transparentNode, TransparentNodeDescriptor descriptor) {
-		super(transparentNode, descriptor);
+		super(transparentNode, descriptor, TransparentNodeElement.EntityMetaTag.Basic);
 		this.descriptor = (TurretDescriptor)descriptor;
         chargePower = ((TurretDescriptor) descriptor).getProperties().chargePower;
 		slowProcessList.add(new TurretSlowProcess(this));

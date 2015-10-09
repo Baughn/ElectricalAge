@@ -50,7 +50,7 @@ public class ElectricalMachineElement extends TransparentNodeElement implements 
     double efficiency = 1.0;
 
     public ElectricalMachineElement(TransparentNode transparentNode, TransparentNodeDescriptor descriptor) {
-		super(transparentNode, descriptor);
+		super(transparentNode, descriptor, TransparentNodeElement.EntityMetaTag.Basic);
 		this.descriptor = (ElectricalMachineDescriptor) descriptor;
 		inSlotId += this.descriptor.outStackCount;
 		boosterSlotId += this.descriptor.outStackCount;

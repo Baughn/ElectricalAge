@@ -65,7 +65,7 @@ public class ElectricalFurnaceElement extends TransparentNodeElement {
     public static final byte unserializeAutoShutDownId = 3;
 
     public ElectricalFurnaceElement(TransparentNode transparentNode, TransparentNodeDescriptor descriptor) {
-		super(transparentNode, descriptor);
+		super(transparentNode, descriptor, TransparentNodeElement.EntityMetaTag.Basic);
 		this.descriptor = (ElectricalFurnaceDescriptor) descriptor;
 		
 		electricalLoad.setAsPrivate();

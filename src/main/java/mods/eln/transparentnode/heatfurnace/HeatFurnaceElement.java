@@ -54,7 +54,7 @@ public class HeatFurnaceElement extends TransparentNodeElement {
     public boolean controlExternal = false, takeFuel = false;
 
     public HeatFurnaceElement(TransparentNode transparentNode, TransparentNodeDescriptor descriptor) {
-		super(transparentNode, descriptor);
+		super(transparentNode, descriptor, TransparentNodeElement.EntityMetaTag.Basic);
 		//this.descriptor.alphaClose = 0;
 		
 		this.descriptor = (HeatFurnaceDescriptor) descriptor;

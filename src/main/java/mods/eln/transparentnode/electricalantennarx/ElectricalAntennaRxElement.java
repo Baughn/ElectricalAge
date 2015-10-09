@@ -44,7 +44,7 @@ public class ElectricalAntennaRxElement extends TransparentNodeElement {
 	}
 
 	public ElectricalAntennaRxElement(TransparentNode transparentNode, TransparentNodeDescriptor descriptor) {
-		super(transparentNode, descriptor);
+		super(transparentNode, descriptor, TransparentNodeElement.EntityMetaTag.Basic);
 		slowProcessList.add(slowProcess);
 	
 		electricalLoadList.add(powerOut);

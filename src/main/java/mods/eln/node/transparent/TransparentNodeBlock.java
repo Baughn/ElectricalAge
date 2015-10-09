@@ -1,5 +1,6 @@
 package mods.eln.node.transparent;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.Random;
 
@@ -124,10 +125,29 @@ public class TransparentNodeBlock extends NodeBlock {
         //Utils.println(list);
     }
 
-
-
-
-
+	@Override
+	public TileEntity createTileEntity(World var1, int meta) {
+		for (TransparentNodeElement.EntityMetaTag tag : TransparentNodeElement.EntityMetaTag.values()) {
+			if (tag.meta == meta) {
+				try {
+					return (TileEntity)tag.cls.getConstructor().newInstance();
+				} catch (InstantiationException e) {
+					e.printStackTrace();
+				} catch (IllegalAccessException e) {
+					e.printStackTrace();
+				} catch (IllegalArgumentException e) {
+					e.printStackTrace();
+				} catch (InvocationTargetException e) {
+					e.printStackTrace();
+				} catch (NoSuchMethodException e) {
+					e.printStackTrace();
+				} catch (SecurityException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		throw new RuntimeException("Unknown block meta-tag: " + meta);
+	}
 
 	public String getNodeUuid() {
 		

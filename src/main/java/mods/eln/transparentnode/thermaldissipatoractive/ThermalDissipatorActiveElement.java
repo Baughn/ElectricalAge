@@ -30,7 +30,7 @@ public class ThermalDissipatorActiveElement extends TransparentNodeElement{
 	
 	public ThermalDissipatorActiveElement(TransparentNode transparentNode,
 			TransparentNodeDescriptor descriptor) {
-		super(transparentNode, descriptor);
+		super(transparentNode, descriptor, TransparentNodeElement.EntityMetaTag.Basic);
 		thermalLoadList.add(thermalLoad);
 		electricalLoadList.add(positiveLoad);
 		electricalComponentList.add(powerResistor);

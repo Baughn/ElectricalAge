@@ -46,7 +46,7 @@ public class ElectricalAntennaTxElement extends TransparentNodeElement{
     double powerEfficency = 0.0;
     
 	public ElectricalAntennaTxElement(TransparentNode transparentNode, TransparentNodeDescriptor descriptor) {
-		super(transparentNode, descriptor);
+		super(transparentNode, descriptor, TransparentNodeElement.EntityMetaTag.Basic);
 		powerIn.setAsPrivate();
 		
 		slowProcessList.add(slowProcess);

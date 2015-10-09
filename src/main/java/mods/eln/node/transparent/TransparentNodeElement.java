@@ -48,6 +48,8 @@ public abstract class TransparentNodeElement implements  GhostObserver,IPlayer{
 	public static final byte unserializeGroundedId = -127;
 	public static final byte unserializeNulldId = -128;
 	TransparentNodeDescriptor transparentNodeDescriptor;
+	public final EntityMetaTag tileEntityMetaTag;
+
 	protected void serialiseItemStack(DataOutputStream stream,ItemStack stack) throws IOException
 	{
 		Utils.serialiseItemStack(stream,stack);
@@ -175,13 +177,26 @@ public abstract class TransparentNodeElement implements  GhostObserver,IPlayer{
 		return null;
 	}
 
-	public TransparentNodeElement(TransparentNode transparentNode,TransparentNodeDescriptor descriptor)
+	public TransparentNodeElement(TransparentNode transparentNode, TransparentNodeDescriptor descriptor, EntityMetaTag tileEntityMetaTag)
 	{
 		this.node = transparentNode;
 		this.transparentNodeDescriptor = descriptor;
+		this.tileEntityMetaTag = tileEntityMetaTag;
 		if(descriptor.hasGhostGroup())Eln.ghostManager.addObserver(this);
 	}
-	
+
+
+	public enum EntityMetaTag {
+		Basic(0, TransparentNodeEntity.class);
+
+		public final int meta;
+		public final Class cls;
+
+		EntityMetaTag(int meta, Class cls) {
+			this.meta = meta;
+			this.cls = cls;
+		}
+	}
 
 	
 	

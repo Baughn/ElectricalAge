@@ -48,7 +48,7 @@ public class AutoMinerElement extends TransparentNodeElement  {
     public static final byte pushLogId = 1;
 
     public AutoMinerElement(TransparentNode transparentNode, TransparentNodeDescriptor descriptor) {
-		super(transparentNode, descriptor);
+		super(transparentNode, descriptor, TransparentNodeElement.EntityMetaTag.Basic);
 		this.descriptor = (AutoMinerDescriptor) descriptor;
 		electricalLoadList.add(inPowerLoad);
 		electricalComponentList.add(powerResistor);

@@ -3,10 +3,7 @@ package mods.eln.transparentnode.transformer;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import com.sun.crypto.provider.DESCipher;
-
 import mods.eln.Eln;
-import mods.eln.Other;
 import mods.eln.item.FerromagneticCoreDescriptor;
 import mods.eln.misc.Direction;
 import mods.eln.misc.LRDU;
@@ -48,7 +45,7 @@ public class TransformerElement extends TransparentNodeElement {
 	SoundLooper highLoadSoundLooper;
 	
 	public TransformerElement(TransparentNode transparentNode, TransparentNodeDescriptor descriptor) {
-		super(transparentNode, descriptor);
+		super(transparentNode, descriptor, TransparentNodeElement.EntityMetaTag.Basic);
 		
 		electricalLoadList.add(primaryLoad);
 		electricalLoadList.add(secondaryLoad);

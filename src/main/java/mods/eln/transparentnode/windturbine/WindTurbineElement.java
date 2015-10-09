@@ -38,7 +38,7 @@ public class WindTurbineElement extends TransparentNodeElement{
 	
 	public WindTurbineElement(TransparentNode transparentNode,
 			TransparentNodeDescriptor descriptor) {
-		super(transparentNode, descriptor);
+		super(transparentNode, descriptor, TransparentNodeElement.EntityMetaTag.Basic);
 		
 
 		

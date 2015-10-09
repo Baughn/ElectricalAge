@@ -10,10 +10,7 @@ import mods.eln.misc.LRDU;
 import mods.eln.misc.Utils;
 import mods.eln.node.NodeBase;
 import mods.eln.node.NodePeriodicPublishProcess;
-import mods.eln.node.transparent.TransparentNode;
-import mods.eln.node.transparent.TransparentNodeDescriptor;
-import mods.eln.node.transparent.TransparentNodeElement;
-import mods.eln.node.transparent.TransparentNodeElementInventory;
+import mods.eln.node.transparent.*;
 import mods.eln.sim.ElectricalLoad;
 import mods.eln.sim.ThermalLoad;
 import mods.eln.sim.nbt.NbtElectricalGateInput;
@@ -54,7 +51,7 @@ public class HeatFurnaceElement extends TransparentNodeElement {
     public boolean controlExternal = false, takeFuel = false;
 
     public HeatFurnaceElement(TransparentNode transparentNode, TransparentNodeDescriptor descriptor) {
-		super(transparentNode, descriptor, TransparentNodeElement.EntityMetaTag.Basic);
+		super(transparentNode, descriptor);
 		//this.descriptor.alphaClose = 0;
 		
 		this.descriptor = (HeatFurnaceDescriptor) descriptor;

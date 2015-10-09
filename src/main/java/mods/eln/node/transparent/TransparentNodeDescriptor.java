@@ -21,20 +21,32 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
 import net.minecraftforge.client.IItemRenderer;
 import net.minecraftforge.client.IRenderContextHandler;
+import scala.xml.Elem;
+
+import javax.swing.text.html.parser.Entity;
 
 public class TransparentNodeDescriptor extends GenericItemBlockUsingDamageDescriptor implements IItemRenderer{
 	public Class ElementClass,RenderClass;
-	public TransparentNodeDescriptor(  String name,
-							 Class ElementClass,Class RenderClass) {
+	public final EntityMetaTag tileEntityMetaTag;
+
+	public TransparentNodeDescriptor(
+			String name,
+			Class ElementClass,
+			Class RenderClass,
+			EntityMetaTag tag) {
 		super( name);
 		this.ElementClass = ElementClass;
 		this.RenderClass = RenderClass;
-		
+		this.tileEntityMetaTag = tag;
 	}
 	
 	
 	protected GhostGroup ghostGroup = null;
-	
+
+	public TransparentNodeDescriptor(String name, Class ElementClass, Class RenderClass) {
+		this(name, ElementClass, RenderClass, EntityMetaTag.Basic);
+	}
+
 	@Override
 	public boolean handleRenderType(ItemStack item, ItemRenderType type) {
 		

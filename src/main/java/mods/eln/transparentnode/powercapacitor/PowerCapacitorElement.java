@@ -6,10 +6,7 @@ import mods.eln.Eln;
 import mods.eln.misc.Direction;
 import mods.eln.misc.LRDU;
 import mods.eln.misc.Utils;
-import mods.eln.node.transparent.TransparentNode;
-import mods.eln.node.transparent.TransparentNodeDescriptor;
-import mods.eln.node.transparent.TransparentNodeElement;
-import mods.eln.node.transparent.TransparentNodeElementInventory;
+import mods.eln.node.transparent.*;
 import mods.eln.sim.ElectricalLoad;
 import mods.eln.sim.IProcess;
 import mods.eln.sim.ThermalLoad;
@@ -36,7 +33,7 @@ public class PowerCapacitorElement extends TransparentNodeElement {
 	
 	public PowerCapacitorElement(TransparentNode transparentNode,
 			TransparentNodeDescriptor descriptor) {
-		super(transparentNode, descriptor, TransparentNodeElement.EntityMetaTag.Basic);
+		super(transparentNode, descriptor);
 		this.descriptor = (PowerCapacitorDescriptor) descriptor;
 
 		electricalLoadList.add(positiveLoad);

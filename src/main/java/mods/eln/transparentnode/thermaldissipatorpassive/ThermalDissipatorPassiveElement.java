@@ -27,7 +27,7 @@ public class ThermalDissipatorPassiveElement extends TransparentNodeElement{
 	
 	public ThermalDissipatorPassiveElement(TransparentNode transparentNode,
 			TransparentNodeDescriptor descriptor) {
-		super(transparentNode, descriptor, TransparentNodeElement.EntityMetaTag.Basic);
+		super(transparentNode, descriptor);
 		
 		thermalLoadList.add(thermalLoad);
 		this.descriptor = (ThermalDissipatorPassiveDescriptor) descriptor;

@@ -26,7 +26,7 @@ public class ComputerCraftIoElement extends TransparentNodeElement implements IP
 	ComputerCraftIoDescriptor descriptor;
 	
 	public ComputerCraftIoElement(TransparentNode transparentNode, TransparentNodeDescriptor descriptor) {
-		super(transparentNode, descriptor, TransparentNodeElement.EntityMetaTag.Basic);
+		super(transparentNode, descriptor);
 		for (int idx = 0; idx < 4; idx++) {
 			ioGate[idx] = new NbtElectricalGateInputOutput("ioGate" + idx);
 			ioGateProcess[idx] = new NbtElectricalGateOutputProcess("ioGateProcess" + idx, ioGate[idx]);

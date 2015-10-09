@@ -3,10 +3,7 @@ package mods.eln.transparentnode.battery;
 import mods.eln.misc.Direction;
 import mods.eln.misc.LRDU;
 import mods.eln.misc.Utils;
-import mods.eln.node.transparent.TransparentNode;
-import mods.eln.node.transparent.TransparentNodeDescriptor;
-import mods.eln.node.transparent.TransparentNodeElement;
-import mods.eln.node.transparent.TransparentNodeElementInventory;
+import mods.eln.node.transparent.*;
 import mods.eln.sim.ElectricalLoad;
 import mods.eln.sim.NodeVoltageState;
 import mods.eln.sim.ThermalLoad;
@@ -63,7 +60,7 @@ public class BatteryElement extends TransparentNodeElement {
     double fromItemStack_life;
     
 	public BatteryElement(TransparentNode transparentNode, TransparentNodeDescriptor descriptor) {
-		super(transparentNode, descriptor, TransparentNodeElement.EntityMetaTag.Basic);
+		super(transparentNode, descriptor);
 		this.descriptor = (BatteryDescriptor) descriptor;
 		
 	   	electricalLoadList.add(cutLoad);

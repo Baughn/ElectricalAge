@@ -8,10 +8,7 @@ import mods.eln.misc.INBTTReady;
 import mods.eln.misc.LRDU;
 import mods.eln.misc.Utils;
 import mods.eln.node.NodeBase;
-import mods.eln.node.transparent.TransparentNode;
-import mods.eln.node.transparent.TransparentNodeDescriptor;
-import mods.eln.node.transparent.TransparentNodeElement;
-import mods.eln.node.transparent.TransparentNodeElementInventory;
+import mods.eln.node.transparent.*;
 import mods.eln.sim.ElectricalLoad;
 import mods.eln.sim.IProcess;
 import mods.eln.sim.ThermalLoad;
@@ -40,7 +37,7 @@ public class EggIncubatorElement extends TransparentNodeElement {
     double lastVoltagePublish;
 
     public EggIncubatorElement(TransparentNode transparentNode, TransparentNodeDescriptor descriptor) {
-		super(transparentNode,descriptor, TransparentNodeElement.EntityMetaTag.Basic);
+		super(transparentNode,descriptor);
 	   	electricalLoadList.add(powerLoad);
 	   	electricalComponentList.add(powerResistor);
 	   	slowProcessList.add(slowProcess);

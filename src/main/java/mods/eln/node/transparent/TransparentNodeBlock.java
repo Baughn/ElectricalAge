@@ -23,7 +23,7 @@ public class TransparentNodeBlock extends NodeBlock {
 	
 	public TransparentNodeBlock( Material material,
 			Class tileEntityClass) {
-		super( material, tileEntityClass, 0);
+		super(material, tileEntityClass, 0);
 		
 	}
 
@@ -127,26 +127,32 @@ public class TransparentNodeBlock extends NodeBlock {
 
 	@Override
 	public TileEntity createTileEntity(World var1, int meta) {
-		for (TransparentNodeElement.EntityMetaTag tag : TransparentNodeElement.EntityMetaTag.values()) {
-			if (tag.meta == meta) {
-				try {
+		try {
+			for (EntityMetaTag tag : EntityMetaTag.values()) {
+				if (tag.meta == meta) {
 					return (TileEntity)tag.cls.getConstructor().newInstance();
-				} catch (InstantiationException e) {
-					e.printStackTrace();
-				} catch (IllegalAccessException e) {
-					e.printStackTrace();
-				} catch (IllegalArgumentException e) {
-					e.printStackTrace();
-				} catch (InvocationTargetException e) {
-					e.printStackTrace();
-				} catch (NoSuchMethodException e) {
-					e.printStackTrace();
-				} catch (SecurityException e) {
-					e.printStackTrace();
 				}
 			}
+			// Sadly, this will happen a lot with pre-metatag worlds.
+			// Only real fix is to replace the blocks, but there should be no
+			// serious downside to getting the wrong subclass so long as they really
+			// wanted the superclass.
+			System.out.println("Unknown block meta-tag: " + meta);
+			return (TileEntity)EntityMetaTag.Basic.cls.getConstructor().newInstance();
+		} catch (InstantiationException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			e.printStackTrace();
+		} catch (NoSuchMethodException e) {
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			e.printStackTrace();
 		}
-		throw new RuntimeException("Unknown block meta-tag: " + meta);
+		while (true);
 	}
 
 	public String getNodeUuid() {

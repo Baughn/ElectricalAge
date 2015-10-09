@@ -8,10 +8,7 @@ import mods.eln.misc.FunctionTable;
 import mods.eln.misc.LRDU;
 import mods.eln.misc.Utils;
 import mods.eln.node.NodeBase;
-import mods.eln.node.transparent.TransparentNode;
-import mods.eln.node.transparent.TransparentNodeDescriptor;
-import mods.eln.node.transparent.TransparentNodeElement;
-import mods.eln.node.transparent.TransparentNodeElementInventory;
+import mods.eln.node.transparent.*;
 import mods.eln.sim.ElectricalLoad;
 import mods.eln.sim.ThermalLoad;
 import mods.eln.sim.mna.component.Resistor;
@@ -48,7 +45,7 @@ public class TurbineElement extends TransparentNodeElement{
 	TurbineDescriptor descriptor;
 	
 	public TurbineElement(TransparentNode transparentNode,TransparentNodeDescriptor descriptor) {
-		super(transparentNode,descriptor, TransparentNodeElement.EntityMetaTag.Basic);
+		super(transparentNode,descriptor);
 		this.descriptor = (TurbineDescriptor) descriptor;
 		
 	   	electricalLoadList.add(inputLoad);

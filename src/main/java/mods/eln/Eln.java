@@ -31,6 +31,9 @@ import mods.eln.item.electricalitem.PortableOreScannerItem.RenderStorage.OreScan
 import mods.eln.item.regulator.IRegulatorDescriptor;
 import mods.eln.item.regulator.RegulatorAnalogDescriptor;
 import mods.eln.item.regulator.RegulatorOnOffDescriptor;
+import mods.eln.mechanical.GeneratorDescriptor;
+import mods.eln.mechanical.GeneratorElement;
+import mods.eln.mechanical.SteamTurbineDescriptor;
 import mods.eln.misc.*;
 import mods.eln.misc.series.SerieEE;
 import mods.eln.node.NodeBlockEntity;
@@ -277,7 +280,9 @@ public class Eln {
 			"FlatScreenMonitor/FlatScreenMonitor.obj",
             "IndustrialPanel/IndustrialPanel.obj",
 			"DistributionBoard/DistributionBoard.obj",
-			"FuelGenerator/FuelGenerator.obj"
+			"FuelGenerator/FuelGenerator.obj",
+			"turbineSteam/Turbine.obj",
+			"turbineSteam/Generator.obj",
 			// "/model/BatteryBigHV/BatteryBigHV.obj"
 	};
 
@@ -2523,6 +2528,30 @@ public class Eln {
 			transparentNodeItem.addDescriptor(subId + (id << 6), desc);
 		}
 
+		{
+			subId = 9;
+			SteamTurbineDescriptor desc = new SteamTurbineDescriptor(
+					"Steam Turbine",
+					obj.getObj("Turbine")
+			);
+			transparentNodeItem.addDescriptor(subId + (id << 6), desc);
+		}
+
+		{
+			subId = 10;
+			float nominalRads = 800, nominalU = 3200;
+			float nominalP = 4000;
+			GeneratorDescriptor desc = new GeneratorDescriptor(
+					"Generator",
+					obj.getObj("Generator"),
+					highVoltageCableDescriptor,
+					nominalRads, nominalU,
+					nominalP / (nominalU / 25),
+					nominalP,
+					sixNodeThermalLoadInitializer.copy()
+			);
+			transparentNodeItem.addDescriptor(subId + (id << 6), desc);
+		}
 	}
 
 	/*
@@ -5054,7 +5083,23 @@ public class Eln {
 				Character.valueOf('E'), findItemStack("Medium Voltage Cable"),
 				Character.valueOf('H'), findItemStack("Copper Thermal Cable"),
 				Character.valueOf('m'), findItemStack("Advanced Electrical Motor"));
-
+		addRecipe(findItemStack("Generator"),
+				"mmm",
+				"ama",
+				" ME",
+				Character.valueOf('m'), findItemStack("Advanced Electrical Motor"),
+				Character.valueOf('M'), findItemStack("Advanced Machine Block"),
+				Character.valueOf('a'), "ingotAluminum",
+				Character.valueOf('E'), findItemStack("High Voltage Cable")
+		);
+		addRecipe(findItemStack("Steam Turbine"),
+				" a ",
+				"aAa",
+				"MaM",
+				Character.valueOf('a'), "ingotAluminum",
+				Character.valueOf('A'), "blockAluminum",
+				Character.valueOf('M'), findItemStack("Advanced Machine Block")
+		);
 	}
 
 	void recipeBattery() {

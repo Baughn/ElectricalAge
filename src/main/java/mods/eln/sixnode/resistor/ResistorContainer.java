@@ -12,7 +12,7 @@ import net.minecraft.inventory.Slot;
  * Created by svein on 05/08/15.
  */
 public class ResistorContainer extends BasicContainer {
-    static final int coreId = 0;
+    public static final int coreId = 0;
 
     public ResistorContainer(EntityPlayer player, IInventory inventory) {
         super(player, inventory, new Slot[]{

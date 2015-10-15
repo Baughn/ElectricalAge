@@ -9,6 +9,69 @@ val BLACK = HSLColor(Color.BLACK)
 val WHITE = HSLColor(Color.WHITE)
 val YELLOW = HSLColor(Color.YELLOW)
 
+
+data class BlackBodyColor(val red: Float, val green: Float, val blue: Float) {
+    fun times(b: Float) = BlackBodyColor(red * b, green * b, blue * b)
+    fun plus(b: BlackBodyColor) = BlackBodyColor(red + b.red, green + b.green, blue + b.blue)
+
+    fun normalize(): BlackBodyColor {
+        val max = Math.max(red, Math.max(green, blue))
+        return BlackBodyColor(red / max, green / max, blue / max)
+    }
+}
+
+/**
+ * Returns the RGB color for a given black-body temperature.
+ * Not very accurate. May return negative values.
+ *
+ * @Param temp: Temperature, in kelvins.
+ */
+fun BlackBodyTemperature(temp: Float): BlackBodyColor {
+    val x = temp / 1000f
+    val x2 = x * x
+    val x3 = x2 * x
+    val x4 = x3 * x
+    val x5 = x4 * x
+
+    val R: Float
+    val G: Float
+    val B: Float
+
+    // red
+    if (temp <= 6600)
+        R = 1.0f
+    else
+        R = 0.0002889f * x5 - 0.01258f * x4 + 0.2148f * x3 - 1.776f * x2 + 6.907f * x - 8.723f
+
+    // green
+    if (temp <= 6600)
+        G = -4.593e-05f * x5 + 0.001424f * x4 - 0.01489f * x3 + 0.0498f * x2 + 0.1669f * x - 0.1653f
+    else
+        G = -1.308e-07f * x5 + 1.745e-05f * x4 - 0.0009116f * x3 + 0.02348f * x2 - 0.3048f * x + 2.159f
+
+    // blue
+    if (temp <= 2000f)
+        B = 0f;
+    else if (temp < 6600f)
+        B = 1.764e-05f * x5 + 0.0003575f * x4 - 0.01554f * x3 + 0.1549f * x2 - 0.3682f * x + 0.2386f
+    else
+        B = 1f;
+
+    return BlackBodyColor(R, G, B)
+}
+
+/**
+ * Returns the luminosity of an ideal radiator at a given black-body temperature, in some sense.
+ * This does not clamp to the visible range, nor account for size or.. anything, really.
+ * (Stefen-Boltzmann law)
+ *
+ * @Param temp: Temperature, in kelvins.
+ */
+fun BlackBodyPower(temp: Float): Float {
+    val sigma = 5.6703e-8f
+    return sigma * temp * temp * temp * temp
+}
+
 /**
  * The HSLColor class provides methods to manipulate HSL (Hue, Saturation
  * Luminance) values to create a corresponding Color object using the RGB

@@ -19,19 +19,19 @@ public class ResistorGui extends GuiContainerEln {
         this.render = render;
     }
 
-    public void initGui() {
-        super.initGui();
-    }
+//    public void initGui() {
+//        super.initGui();
+//    }
 
-    @Override
-    public void guiObjectEvent(IGuiObject object) {
-        super.guiObjectEvent(object);
-    }
+//    @Override
+//    public void guiObjectEvent(IGuiObject object) {
+//        super.guiObjectEvent(object);
+//    }
 
-    @Override
-    protected void preDraw(float f, int x, int y) {
-        super.preDraw(f, x, y);
-    }
+//    @Override
+//    protected void preDraw(float f, int x, int y) {
+//        super.preDraw(f, x, y);
+//    }
 
     @Override
     protected void postDraw(float f, int x, int y) {

@@ -17,8 +17,8 @@ abstract class SimpleShaftDescriptor(name: String, elm: KClass<out TransparentNo
         TransparentNodeDescriptor(name, elm.java, render.java, tag) {
 
     abstract val obj: Obj3D
-    abstract val static: Array<Obj3D.Obj3DPart>
-    abstract val rotating: Array<Obj3D.Obj3DPart>
+    abstract val static: Array<out Obj3D.Obj3DPart>
+    abstract val rotating: Array<out Obj3D.Obj3DPart>
 
     fun draw(angle: Double) {
         for (part in static) {

@@ -4,6 +4,7 @@ import mods.eln.Eln
 import mods.eln.cable.CableRender
 import mods.eln.cable.CableRenderDescriptor
 import mods.eln.cable.CableRenderType
+import java.awt.Color
 import mods.eln.misc.*
 import mods.eln.node.NodeBase
 import mods.eln.node.transparent.EntityMetaTag
@@ -57,9 +58,17 @@ class GeneratorDescriptor(
     override val static = arrayOf(
             obj.getPart("Cowl"),
             obj.getPart("Stand")
-    )
-    override val rotating = arrayOf(obj.getPart("Shaft"))
-    public val powerLight = obj.getPart("Power")
+    ).requireNoNulls()
+    override val rotating = arrayOf(obj.getPart("Shaft")).requireNoNulls()
+    public val powerLights = arrayOf(
+            obj.getPart("LED_0"),
+            obj.getPart("LED_1"),
+            obj.getPart("LED_2"),
+            obj.getPart("LED_3"),
+            obj.getPart("LED_4"),
+            obj.getPart("LED_5"),
+            obj.getPart("LED_6")
+    ).requireNoNulls()
 
     override fun addInformation(stack: ItemStack, player: EntityPlayer, list: MutableList<String>, par4: Boolean) {
         list.add("Converts mechanical energy into electricity, or (badly) vice versa.")
@@ -78,7 +87,7 @@ inline fun preserveMatrix<T>(body: () -> T): T {
     return ret
 }
 
-class GeneratorRender(entity: TransparentNodeEntity, desc: TransparentNodeDescriptor): ShaftRender(entity, desc) {
+class GeneratorRender(entity: TransparentNodeEntity, desc_: TransparentNodeDescriptor): ShaftRender(entity, desc_) {
     val entity = entity
 
     var cableRefresh = true
@@ -86,36 +95,60 @@ class GeneratorRender(entity: TransparentNodeEntity, desc: TransparentNodeDescri
     val mask = LRDUMask()
     var connectionType: CableRenderType? = null
     val cableRender = Eln.instance.stdCableRender3200V
-    val desc = desc as GeneratorDescriptor
-    var ledColor = java.awt.Color(0,0,0)
+    val desc = desc_ as GeneratorDescriptor
+
+    val ledColors: Array<Color> = arrayOf(
+            java.awt.Color.black,
+            java.awt.Color.black,
+            java.awt.Color.black,
+            java.awt.Color.black,
+            java.awt.Color.black,
+            java.awt.Color.black,
+            java.awt.Color.black
+    )
+    val ledColorBase: Array<HSLColor> = arrayOf(
+            GREEN,
+            GREEN,
+            GREEN,
+            GREEN,
+            YELLOW,
+            RED,
+            RED
+    )
 
     init {
         mask.set(LRDU.Down, true)
-        calcPower(0.0)
     }
 
     fun calcPower(power: Double) {
-        val load : Double
-        if (power < 0)
-            load = power * -10.0
-        else
-            load = power
-        val luminance = rads / desc.nominalRads * 60.0 + 20.0
-        val saturation = Math.min(load / desc.nominalP, 1.0) * 100.0
-        // 0 = red, 60 = yellow, 120 = green, 180 = ..blueish?
-        val hue = (desc.nominalP - power) * 60.0 / desc.nominalP + 60.0
-        val hsl = HSLColor(hue.toFloat(), saturation.toFloat(), luminance.toFloat())
-        ledColor = hsl.rgb
+        if (power < 0) {
+            for (i in 1..6) {
+                ledColors[i] = Color.black
+            }
+            ledColors[0] = RED.adjustLuminanceClamped((-power / desc.nominalP * 4 * 100).toFloat(), 0f, 60f)
+        } else {
+            val slice = desc.nominalP / 5
+            var remainder = power
+            for (i in 0..6) {
+                ledColors[i] = ledColorBase[i].adjustLuminanceClamped((remainder / slice * 100).toFloat(), 0f, 65f)
+                remainder -= slice
+            }
+        }
     }
+
 
     override fun draw() {
         preserveMatrix {
             super.draw()
-            GL11.glColor3f(
-                    ledColor.red.toFloat() / 255f,
-                    ledColor.green.toFloat() / 255f,
-                    ledColor.blue.toFloat() / 255f)
-            desc.powerLight.draw()
+            // Draw the LEDs.
+            ledColors.forEachIndexed { i, color ->
+                GL11.glColor3f(
+                        color.red / 255f,
+                        color.green / 255f,
+                        color.blue / 255f
+                )
+                desc.powerLights.get(i).draw()
+            }
         }
 
         preserveMatrix {
@@ -251,8 +284,12 @@ class GeneratorElement(node: TransparentNode, desc_: TransparentNodeDescriptor):
 
 
     override fun getElectricalLoad(side: Direction, lrdu: LRDU): ElectricalLoad? {
-        if (lrdu == LRDU.Down && side == front) return inputLoad
-        return null
+        if (lrdu != LRDU.Down) return null;
+        return when (side) {
+            front -> inputLoad
+            front.back() -> inputLoad
+            else -> null
+        }
     }
 
     override fun getThermalLoad(side: Direction?, lrdu: LRDU?) = thermal

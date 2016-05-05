@@ -546,7 +546,7 @@ public class Equation implements IValue, INBTTReady {
 		@Override
 		public void setOperator(IValue[] values) {
 			this.a = values[0];
-			this.b = values[0];
+			this.b = values[1];
 		}
 
 		@Override
